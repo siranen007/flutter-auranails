@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "108352259505",
+    "firebase_url": "https://auranails-bd2c3.firebaseio.com",
+    "project_id": "auranails-bd2c3",
+    "storage_bucket": "auranails-bd2c3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:108352259505:android:1f6924b72c993733c12990",
+        "android_client_info": {
+          "package_name": "com.judqueue.auranails"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "108352259505-8ihjetmkg5vb4nc6ce2kp9q1m75fjnot.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATJRFM-dK9YokeDbEytp-suhLU1dbN-xg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "108352259505-8ihjetmkg5vb4nc6ce2kp9q1m75fjnot.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "108352259505-c9s20igafljcpv2uukccnevi24jh5ta3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.judqueue.auranails"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
