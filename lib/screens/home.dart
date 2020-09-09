@@ -1,3 +1,4 @@
+import 'package:auranails/screens/register.dart';
 import 'package:auranails/screens/sign_in.dart';
 import 'package:auranails/utility/background_painter.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin {
   AnimationController _controller;
+  ValueNotifier<bool> showSignInPage = ValueNotifier<bool>(true);
 
   @override
   void initState() {
@@ -39,7 +41,24 @@ class _MyHomePageState extends State<MyHomePage>
                 ),
               ),
             ),
-            SignIn(),
+            ValueListenableBuilder(
+              valueListenable: showSignInPage,
+              builder: (context, value, child) {
+                return value
+                    ? SignIn(
+                        onSignUpClicked: () {
+                          showSignInPage.value = false;
+                          _controller.forward();
+                        },
+                      )
+                    : SignUp(
+                        onSignInPressed: () {
+                          showSignInPage.value = true;
+                          _controller.reverse();
+                        },
+                      );
+              },
+            ),
           ],
         ),
       ),

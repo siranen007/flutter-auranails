@@ -102,7 +102,7 @@ class BackgroundPainter extends CustomPainter {
 
   void paintGrey(Canvas canvas, Size size) {
     final path = Path();
-    path.moveTo(size.width, 300);
+    path.moveTo(size.width, 200);
     path.lineTo(size.width, 0);
     path.lineTo(0, 0);
     path.lineTo(
@@ -114,12 +114,12 @@ class BackgroundPainter extends CustomPainter {
         ));
     _addPointsToPath(path, [
       Point(
-        size.width / 4,
+        size.width / 7,
         lerpDouble(size.height / 2, size.height * 3 / 4, liquidAnim.value),
       ),
       // Point(size.width, size.width / 4),
       Point(
-        size.width *3 / 5,
+        size.width * 3 / 5,
         lerpDouble(size.height / 4, size.height / 2, liquidAnim.value),
       ),
       Point(
