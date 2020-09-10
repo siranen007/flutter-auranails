@@ -36,6 +36,7 @@ InputDecoration registerInputDecoration({String hintText}) {
     errorStyle: TextStyle(
       color: Colors.white,
     ),
+    
   );
 }
 

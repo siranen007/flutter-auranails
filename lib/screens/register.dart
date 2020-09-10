@@ -38,6 +38,7 @@ class SignUp extends StatelessWidget {
                         color: Colors.white,
                       ),
                       decoration: registerInputDecoration(hintText: 'Email'),
+                      
                     ),
                   ),
                   Padding(

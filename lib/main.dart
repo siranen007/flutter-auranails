@@ -1,4 +1,4 @@
-import 'package:auranails/screens/home.dart';
+import 'package:auranails/screens/splash.dart';
 import 'package:auranails/utility/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -23,7 +23,9 @@ class MyApp extends StatelessWidget {
             color: Palette.darkBlue,
           ),
         ),
-        home: MyHomePage(),
+        // home: LitAuthState(authenticated: WelcomeScreen(),
+        // unauthenticated: MyHomePage(),),
+        home: SplashScreen(),
       ),
     );
   }

@@ -1,11 +1,18 @@
 import 'package:animations/animations.dart';
 import 'package:auranails/screens/register.dart';
 import 'package:auranails/screens/sign_in.dart';
+import 'package:auranails/screens/welcome.dart';
 import 'package:auranails/utility/background_painter.dart';
+import 'package:auranails/utility/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:lit_firebase_auth/lit_firebase_auth.dart';
 
 class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key key}) : super(key: key);
+
+  static MaterialPageRoute get route => MaterialPageRoute(
+        builder: (context) => const MyHomePage(),
+      );
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -33,6 +40,25 @@ class _MyHomePageState extends State<MyHomePage>
   Widget build(BuildContext context) {
     return Scaffold(
       body: LitAuth.custom(
+        errorNotification: const NotificationConfig(
+          backgroundColor: Palette.darkBlue,
+          icon: Icon(
+            Icons.error_outline,
+            color: Palette.darkOrange,
+            size: 32,
+          ),
+        ),
+        successNotification: const NotificationConfig(
+          backgroundColor: Palette.darkBlue,
+          icon: Icon(
+            Icons.check,
+            color: Colors.white,
+            size: 32,
+          ),
+        ),
+        onAuthSuccess: () {
+          Navigator.of(context).pushReplacement(WelcomeScreen.route);
+        },
         child: Stack(
           children: [
             SizedBox.expand(
@@ -61,6 +87,7 @@ class _MyHomePageState extends State<MyHomePage>
                       },
                       child: value
                           ? SignIn(
+                              key: ValueKey('SignIn'),
                               onSignUpClicked: () {
                                 context.resetSignInForm();
                                 showSignInPage.value = false;
@@ -68,6 +95,7 @@ class _MyHomePageState extends State<MyHomePage>
                               },
                             )
                           : SignUp(
+                              key: ValueKey('SignUp'),
                               onSignInPressed: () {
                                 context.resetSignInForm();
                                 showSignInPage.value = true;
