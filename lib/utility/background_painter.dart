@@ -161,7 +161,7 @@ class BackgroundPainter extends CustomPainter {
         lerpDouble(0, size.height / 8, liquidAnim.value),
       ),
       Point(
-        size.width /3 * 4,
+        size.width /3 * 2.3,
         0,
       ),
     ]);

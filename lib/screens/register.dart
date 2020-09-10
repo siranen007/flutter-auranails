@@ -1,11 +1,12 @@
 import 'package:auranails/utility/decoration_function.dart';
+import 'package:auranails/utility/palette.dart';
 import 'package:auranails/utility/sign_in_up_bar.dart';
 import 'package:auranails/utility/title.dart';
 import 'package:flutter/material.dart';
 import 'package:lit_firebase_auth/lit_firebase_auth.dart';
 
 class SignUp extends StatelessWidget {
-  const SignUp({Key key,@required this.onSignInPressed}) : super(key: key);
+  const SignUp({Key key, @required this.onSignInPressed}) : super(key: key);
 
   final VoidCallback onSignInPressed;
 
@@ -55,6 +56,23 @@ class SignUp extends StatelessWidget {
                       context.registerWithEmailAndPassword();
                     },
                     isLoading: isSubmitting,
+                  ),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: InkWell(
+                      splashColor: Colors.white,
+                      onTap: () {
+                        onSignInPressed?.call();
+                      },
+                      child: Text(
+                        'Sign In',
+                        style: TextStyle(
+                          fontSize: 16,
+                          decoration: TextDecoration.underline,
+                          color: Palette.darkBlue,
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),

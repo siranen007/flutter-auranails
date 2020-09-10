@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:auranails/screens/register.dart';
 import 'package:auranails/screens/sign_in.dart';
 import 'package:auranails/utility/background_painter.dart';
@@ -41,23 +42,42 @@ class _MyHomePageState extends State<MyHomePage>
                 ),
               ),
             ),
-            ValueListenableBuilder(
-              valueListenable: showSignInPage,
-              builder: (context, value, child) {
-                return value
-                    ? SignIn(
-                        onSignUpClicked: () {
-                          showSignInPage.value = false;
-                          _controller.forward();
-                        },
-                      )
-                    : SignUp(
-                        onSignInPressed: () {
-                          showSignInPage.value = true;
-                          _controller.reverse();
-                        },
-                      );
-              },
+            Center(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(maxWidth: 800),
+                child: ValueListenableBuilder(
+                  valueListenable: showSignInPage,
+                  builder: (context, value, child) {
+                    return PageTransitionSwitcher(
+                      duration: Duration(microseconds: 800),
+                      transitionBuilder: (child, animation, secondaryAnimaion) {
+                        return SharedAxisTransition(
+                          animation: animation,
+                          secondaryAnimation: secondaryAnimaion,
+                          transitionType: SharedAxisTransitionType.vertical,
+                          fillColor: Colors.transparent,
+                          child: child,
+                        );
+                      },
+                      child: value
+                          ? SignIn(
+                              onSignUpClicked: () {
+                                context.resetSignInForm();
+                                showSignInPage.value = false;
+                                _controller.forward();
+                              },
+                            )
+                          : SignUp(
+                              onSignInPressed: () {
+                                context.resetSignInForm();
+                                showSignInPage.value = true;
+                                _controller.reverse();
+                              },
+                            ),
+                    );
+                  },
+                ),
+              ),
             ),
           ],
         ),
