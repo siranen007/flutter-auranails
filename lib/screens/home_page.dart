@@ -2,6 +2,8 @@
 import 'package:auranails/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:lit_firebase_auth/lit_firebase_auth.dart';
+import 'package:animations/animations.dart';
+import 'package:auranails/utility/background_painter.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key key}) : super(key: key);
@@ -13,24 +15,66 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
+  AnimationController _controller;
+  ValueNotifier<bool> showSignInPage = ValueNotifier<bool>(true);
+
+  @override
+  void initState() {
+    _controller =
+        AnimationController(vsync: this, duration: Duration(seconds: 2));
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Home',
-          style: TextStyle(color: Colors.white),
-        ),
-      ),
-      body: Center(
-        child: RaisedButton(
-          onPressed: () {
-            context.signOut();
-            Navigator.of(context).push(MyHomePage.route);
-          },
-          child: const Text('Sign Out'),
-        ),
+      body: Stack(
+        children: [
+          SizedBox.expand(
+            child: CustomPaint(
+              painter: BackgroundPainter(
+                animation: _controller.view,
+              ),
+            ),
+          ),
+          Center(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(maxWidth: 800),
+              child: ValueListenableBuilder(
+                valueListenable: showSignInPage,
+                builder: (context, value, child) {
+                  return PageTransitionSwitcher(
+                    duration: Duration(microseconds: 800),
+                    transitionBuilder: (child, animation, secondaryAnimaion) {
+                      return SharedAxisTransition(
+                        animation: animation,
+                        secondaryAnimation: secondaryAnimaion,
+                        transitionType: SharedAxisTransitionType.vertical,
+                        fillColor: Colors.transparent,
+                        child: child,
+                      );
+                    },
+                    child: RaisedButton(
+                      onPressed: () {
+                        context.signOut();
+                        Navigator.of(context).push(MyHomePage.route);
+                      },
+                      child: const Text('Sign Out'),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
